@@ -3,17 +3,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!search.trim()) return;
 
-    // Product search will be implemented later.
-    alert(`Searching for: ${search}`);
+    router.push(`/scan?q=${encodeURIComponent(search.trim())}`);
   }
 
   return (
@@ -28,9 +29,7 @@ export default function Home() {
             FoodLens
           </Link>
 
-          <span className="text-sm text-slate-500">
-            Food Safety Intelligence
-          </span>
+          <Link href="/scan" className="text-sm font-semibold text-emerald-700">Scan Product</Link>
         </nav>
       </header>
 
